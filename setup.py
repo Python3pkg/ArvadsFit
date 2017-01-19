@@ -8,7 +8,7 @@ setup(name='ArvadsFit',
       author_email='Arvad91@gmail.com',
       license='MIT',
       packages=['ArvadsFit'],
-      isntall_requires=[
+      install_requires=[
                         'numpy',
                         'iminuit',
                         'probfit'],
