@@ -1,1 +1,1 @@
-from FitClass import *
+from .FitClass import *

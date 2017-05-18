@@ -8,9 +8,9 @@ class Fit:
         '''This class is used to fit an awesome function'''
         try:
             parnames = describe(function)[1:]
-        except ValueError as e:
-            print('Remember that the variable must come before the parameters in your function definition.')
-            print("I.e. given a,b,c as optimization parameters, define f(x,a,b,c) and not f(a,x,b,c).")
+        except ValueError,e:
+            print 'Remember that the variable must come before the parameters in your function definition.'
+            print "I.e. given a,b,c as optimization parameters, define f(x,a,b,c) and not f(a,x,b,c)."
         else:
             self.fnc = function
             self.x, self.y = [np.array(t) for t in zip(*sorted(zip(xdata, ydata)))]
@@ -106,10 +106,10 @@ class Fit:
 
         if any([k.Ifbound() for k in self.parlist]):
             bounds = {'limit_'+name:bound for (name,bound) in ((k.Name(),k.Bounds()) for k in self.parlist)}
-            print("Some parameters are limited:")
+            print "Some parameters are limited:"
             for apar in self.parlist:
                 if apar.Ifbound():
-                    print("{:s} ({:}, {:})".format(apar.Name(), *apar.Bounds()))
+                    print "{:s} ({:}, {:})".format(apar.Name(), *apar.Bounds())
             args.update(bounds)
 
         args.update({'print_level':0})
@@ -120,13 +120,13 @@ class Fit:
 
         minimizer.migrad()
         if not minimizer.get_fmin().is_valid:
-            print(minimizer.get_fmin())
+            print minimizer.get_fmin()
         else:
             if self.assymetricalErrors:
                 minimizer.minos()
 
 
-            for akey,avalue in minimizer.values.items():
+            for akey,avalue in minimizer.values.iteritems():
                 for apar in self.parlist:
                     if apar.Name() == akey:
                         apar.Value(avalue)
